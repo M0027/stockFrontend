@@ -27,7 +27,7 @@ export default function Login() {
 
 
         try {
-            const response = await fetch("http://localhost:5432/api/login", {
+            const response = await fetch("https://backendstock-zyx4.onrender.com/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
