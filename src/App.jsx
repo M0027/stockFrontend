@@ -1,14 +1,14 @@
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import CadastroLoja from './pages/CadastroLoja';
-import AdminLogin from './pages/AdminLogin';
-import Produtos from './pages/Produto';
-import Dashboard from './pages/Dashboade';
-import LoginLoja from './pages/Login';
-import CategoriaManager from './pages/CategoriaManager';
-import AddProduto from './pages/AddProduto';
-import AddVenda from './pages/AddVenda';
-import Vendas from './pages/Vendas';
+import CadastroLoja from './pages/CadastroLoja.jsx';
+import AdminLogin from './pages/AdminLogin.jsx';
+import Produtos from './pages/Produto.jsx';
+import Dashboard from './pages/Dashboade.jsx';
+import LoginLoja from './pages/Login.jsx';
+import CategoriaManager from './pages/CategoriaManager.jsx';
+import AddProduto from './pages/AddProduto.jsx';
+import AddVenda from './pages/AddVenda.jsx';
+import Vendas from './pages/Vendas.jsx';
 
 export default function App() {
 

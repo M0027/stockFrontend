@@ -5,10 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
-    //emptyOutDir: true
+    assetsDir: 'assets'
   },
-
-  server:{
-    historyApiFallback: true
-  }
+  base: './' // Importante para paths relativos
 })
