@@ -65,16 +65,17 @@ export default function CategoriaManager() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white px-4 py-8">
-      { isloading? <Loading message="Aguar um momento..."/>:""}
+    <div className="min-h-screen flex flex-col items-center justify-center z-10 bg-black text-white px-4 py-8">
 
-      <div className="w-full max-w-md bg-zinc-900 p-6 rounded-lg">
+      <div className="w-full max-w-md bg-zinc-900 p-6 z-20 rounded-lg">
+
+      
         <h2 className="text-center text-2xl font-bold mb-4">Gerenciar Categorias</h2>
 
         <form
           onSubmit={adicionarCategoria}
           className="flex gap-2 mb-4"
-        >
+          >
           <input
             type="text"
             placeholder="Nova categoria"
@@ -86,10 +87,11 @@ export default function CategoriaManager() {
           <button
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-transform duration-200 transform hover:scale-105"
-          >
+            >
             Adicionar
           </button>
         </form>
+            { isloading? <Loading message="Aguar um momento..."/>:""}
 
         <ul className="space-y-2">
           {categorias.map((cat) => (

@@ -66,11 +66,11 @@ export default function CadastroLoja() {
 
   return (
     <div className="min-h-screen bg-[#111] text-white font-sans flex justify-center items-start pt-16 px-4">
-      {loading? <Loading message="Cadastrando..."/>:''}
       <div className="max-w-md w-full bg-[#1c1c1c] rounded-xl shadow-md shadow-cyan-900 p-8">
         <h2 className="text-center text-cyan-400 text-2xl mb-6 font-semibold">
           Cadastrar Loja
         </h2>
+      {loading? <Loading message="Cadastrando..."/>:''}
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <input

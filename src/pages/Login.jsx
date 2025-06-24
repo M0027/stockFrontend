@@ -56,14 +56,14 @@ export default function Login() {
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-[#000]">
 
-           { loading? <Loading message="A Verificar Credencias"/>: ""}
             <motion.div
                 className="max-w-md w-full p-8 bg-zinc-800 text-center rounded-2xl shadow-xl"
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-            >
+                >
                 <h1 className="text-2xl text-white mb-6 font-bold">StockLigeiro</h1>
+                { loading? <Loading message="A Verificar Credencias"/>: ""}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex items-center border border-gray-300 rounded-lg p-2 bg-gray-100">

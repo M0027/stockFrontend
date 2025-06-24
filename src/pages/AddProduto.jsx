@@ -76,13 +76,13 @@ export default function AddProduto() {
   return (
     <div className="min-h-screen bg-[#111] flex flex-col justify-center items-center p-6 text-white">
     
-    { isSubmitting? <Loading message="A adicionar..."/>:""}
 
       <h2 className="text-3xl mb-6 flex items-center gap-2">
         <FiPackage />
         Adicionar Produto
       </h2>
 
+    { isSubmitting? <Loading message="A adicionar..."/>:""}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-[#333] rounded-lg p-6 w-full max-w-md flex flex-col gap-4"
