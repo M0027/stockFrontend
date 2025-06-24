@@ -6,29 +6,11 @@ import Produtos from './pages/Produto';
 import Dashboard from './pages/Dashboade';
 import LoginLoja from './pages/Login';
 import CategoriaManager from './pages/CategoriaManager';
-
-import { useEffect, useState } from 'react';
 import AddProduto from './pages/AddProduto';
 import AddVenda from './pages/AddVenda';
 import Vendas from './pages/Vendas';
 
 export default function App() {
-  const [autenticado, setAutenticado] = useState(false);
-
-  const token = sessionStorage.getItem('token');
-
-  useEffect(() => {
-
-    if (token) {
-      setAutenticado(true);
-    }else{
-      // setAutenticado(false)
-    }
-  }, []);
-
-  const RotaProtegida = ({ children }) => {
-    return autenticado ? children : <Navigate to="/" />;
-  };
 
 
   return (
@@ -43,53 +25,52 @@ export default function App() {
         <Route
           path="/dashboard"
           element={
-            
-              <Dashboard />
-            
+
+            <Dashboard />
+
           }
         />
         <Route
           path="/produtos"
           element={
-            <RotaProtegida>
-              <Produtos />
-            </RotaProtegida>
+
+            <Produtos />
+
           }
         />
         <Route
           path="/add-produto"
           element={
-            <RotaProtegida>
-              <AddProduto />
-            </RotaProtegida>
+
+            <AddProduto />
+
           }
         />
         <Route
           path="/add-venda"
           element={
-            <RotaProtegida>
-              <AddVenda />
-            </RotaProtegida>
+
+            <AddVenda />
+
           }
         />
         <Route
           path="/categoria"
           element={
-            <RotaProtegida>
-              <CategoriaManager />
-            </RotaProtegida>
+
+            <CategoriaManager />
           }
         />
 
         <Route
           path="/vendas"
           element={
-            <RotaProtegida>
-              <Vendas />
-            </RotaProtegida>
+
+            <Vendas />
+
           }
         />
       </Routes>
-    </Router>
+    </Router >
   );
 }
