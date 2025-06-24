@@ -2,16 +2,12 @@
   "version": 2,
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "headers": {
-        "Content-Type": "application/javascript"
-      },
-      "continue": true
+      "src": "/(.*)\\.(js|css|png|jpg|svg|ico|json|woff2?)",
+      "dest": "/$1.$2"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html",
-      "status": 200
+      "dest": "/index.html"
     }
   ]
 }
