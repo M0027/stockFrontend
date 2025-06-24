@@ -6,16 +6,8 @@
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist",
-        "cleanDistDir": true
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/dist/$1",
-      "headers": {
-        "Cache-Control": "s-maxage=3600, stale-while-revalidate"
+        "installCommand": "npm install --force --legacy-peer-deps",
+        "buildCommand": "npm run build"
       }
     }
   ]
