@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Loading from '../components/Loading'
 
 export default function AddProduto() {
- const token = sessionStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
   const navigate = useNavigate();
 
   if (!token) {
@@ -29,8 +29,7 @@ export default function AddProduto() {
     return parseFloat(value) >= buyPrice || "Preço de venda deve ser maior ou igual ao de compra";
   };
 
-  const onSubmit = async (data, e) => {
-    e.preventDefault();
+  const onSubmit = async (data)=> {
     if (!categoriaId) {
       toast.error('Selecione uma categoria', { icon: <FiAlertCircle /> });
       return;
@@ -75,14 +74,14 @@ export default function AddProduto() {
 
   return (
     <div className="min-h-screen bg-[#111] flex flex-col justify-center items-center p-6 text-white">
-    
+
 
       <h2 className="text-3xl mb-6 flex items-center gap-2">
         <FiPackage />
         Adicionar Produto
       </h2>
 
-    { isSubmitting? <Loading message="A adicionar..."/>:""}
+      {isSubmitting ? <Loading message="A adicionar..." /> : ""}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-[#333] rounded-lg p-6 w-full max-w-md flex flex-col gap-4"
@@ -165,9 +164,8 @@ export default function AddProduto() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`mt-4 flex justify-center items-center gap-2 font-bold py-3 px-4 rounded transition ${
-            isSubmitting ? 'bg-blue-500 opacity-70 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-          }`}
+          className={`mt-4 flex justify-center items-center gap-2 font-bold py-3 px-4 rounded transition ${isSubmitting ? 'bg-red-500 opacity-70 cursor-not-allowed' : 'bg-red-500 hover:bg-red-700'
+            }`}
         >
           {isSubmitting ? 'Salvando...' : (
             <>

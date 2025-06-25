@@ -60,9 +60,7 @@ export default function AddVenda() {
         }
     };
 
-    const onSubmit = async (data, e) => {
-       
-        e.preventDefault();
+    const onSubmit = async (data) => {
         setIsSubmitting(true);
 
         const token = sessionStorage.getItem('token');

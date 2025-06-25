@@ -34,7 +34,7 @@ export default function CategoriaSelect({ onSelect }) {
 
   return (
     <div className="categoria-select">
-      <select className='bg-blue-400' value={selecionada} onChange={handleChange} required>
+      <select className='bg-red-500 text-white' value={selecionada} onChange={handleChange} required>
         <option value="">Selecione uma categoria</option>
         {categorias?.map(cat => (
           <option className='' key={cat.id} value={cat.id}>

@@ -32,11 +32,17 @@ export default function Vendas() {
         const confirm = window.confirm("Tem certeza que deseja excluir esta venda?");
         if (!confirm) return;
 
+
+
         try {
+
+            setIsloading(true)
             await api.delete(`/vendas/${id}`, { headers });
             buscarVendas(); // Atualiza a lista após excluir
         } catch (err) {
             console.error("Erro ao excluir venda", err);
+        }finally{
+            setIsloading(false)
         }
     };
 

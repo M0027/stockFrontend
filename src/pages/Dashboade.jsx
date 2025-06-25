@@ -30,6 +30,7 @@ export default function Dashboard() {
     const [isLoading, setIsloading] = useState(true);
     const [dia_registo, setDia_registo] = useState(0)
     const [dia_Hoje, setDia_hoje] = useState(0)
+    const [faturamento, setFaturameno] = useState(0)
 
 
 
@@ -69,7 +70,7 @@ export default function Dashboard() {
 
             const dataISO = parseJwt(token).data_cadastro;
 
-              console.log("mauro",lojaMetaDados)
+            //   console.log("mauro",lojaMetaDados)
 
             setDia_registo(new Date(dataISO).getDate())
             setDia_hoje(new Date().getDate())
@@ -79,10 +80,10 @@ export default function Dashboard() {
             if (dia_registo + 3 - dia_Hoje > -1) {
 
                 setEspirou(false);
-                console.log("plano inspirado");
+                // console.log("plano em dia");
             } else {
                 setEspirou(true);
-                console.log(`plano ainda tem`);
+                // console.log(`plano ainda tem`);
             }
         };
 
@@ -108,7 +109,7 @@ export default function Dashboard() {
             try {
                 const produtos = await api.get("/produtos", { headers });
                 Setprodutos(produtos.data)
-                console.log('produtos.data', produtos?.data)
+                // console.log('produtos.data', produtos?.data)
             } catch (err) {
                 console.error("Erro ao buscar estatísticas", err);
             }
@@ -150,7 +151,7 @@ export default function Dashboard() {
                 const categorias = await api.get("/categorias", { headers });
                 SetCategorias(categorias.data)
 
-                console.log('categorias.data', categorias?.data)
+                // console.log('categorias.data', categorias?.data)
             } catch (error) {
                 console.error(error);
             } finally {
@@ -161,22 +162,36 @@ export default function Dashboard() {
         fetchCategoria();
 
 
+
+
+
     }, []);
 
     const totalStock = produtos?.length > 0 ? produtos.reduce((soma, produto) => soma + produto.stock, 0) : 0;
     const totalVendas = vendas?.length > 0 ? vendas.reduce((soma, produto) => soma + produto.quantidade, 0) : 0;
-    const totalFaturamento = vendas?.length > 0 ? vendas.reduce((soma, produto) => soma + produto.total, 0) : 0;
 
-    // console.log(' totalStock', totalStock)
-    // console.log(' totalVendas', totalVendas)
-    // console.log('totalFaturamento', totalFaturamento)
-    // console.log('categorias', categorias)
+    const totalFaturamento = vendas?.length > 0
+        ? vendas.reduce((soma, produto) => {
+            // Converte a string para número, tratando vírgulas e pontos
+            const valor = parseFloat(
+                String(produto.total)
+                    .replace(/[^\d,-]/g, '')  // Remove caracteres não numéricos (exceto "," e "-")
+                    .replace('.', '')         // Remove pontos (separadores de milhar)
+                    .replace(',', '.')        // Substitui vírgula por ponto (decimal)
+            ) || 0;  // Se der NaN, usa 0
 
+            return soma + valor;
+        }, 0)
+        : 0;
+    console.log('aquiii', totalFaturamento.toFixed(2).replace('.', ','))
 
     const produtosComLucro = produtos?.length > 0 ? produtos.map((produto) => ({
         ...produto,
         lucro: produto.preco_venda - produto.preco_compra,
-    })) : 0;
+    })) : [];
+
+
+    // console.log('produtos com luco', produtosComLucro)
 
     const vendidos = (id) => {
         if (vendas.length > 0) {
@@ -236,12 +251,12 @@ export default function Dashboard() {
                         <Tags size={42} />
                         <span className="text-4xl block sm:text-md box-border  mt-2">{categorias?.length}</span>
                         <p className="text-4xl font-bold mt-2">Categorias</p>
-                    </div>
-                    <div className="card bg-red-500 flex flex-col border-0 justify-center items-center p-8 rounded-xl w-60 h-60 text-center shadow-lg transition-transform transform hover:scale-105">
-                        <FaMoneyBillWave size={42} />
-                        <span className="text-2xl block max-sm:2xl  box-border mt-2">{totalFaturamento}MT</span>
-                        <p className="text-4xl font-bold mt-2">Faturamento</p>
-                    </div>
+                    </div>  {totalFaturamento == 0 ? "" :
+                        <div className="card bg-red-500 flex flex-col border-0 justify-center items-center p-8 rounded-xl w-60 h-60 text-center shadow-lg transition-transform transform hover:scale-105">
+                            <FaMoneyBillWave size={42} />
+                            <span className="text-2xl block max-sm:2xl  box-border mt-2">{totalFaturamento.toFixed(2).replace('.', ',')}MT</span>
+                            <p className="text-4xl font-bold mt-2">Faturamento</p>
+                        </div>}
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-4 mt-6 text-xl">
@@ -318,7 +333,7 @@ export default function Dashboard() {
                         </thead>
                         <tbody>
                             {vendas?.length > 0 &&
-                                produtosComLucro.map((produto, index) => (
+                                produtosComLucro?.map((produto, index) => (
                                     <tr key={index}>
                                         <td className="border border-[#003366] p-3">{produto.nome}</td>
                                         <td className="border border-[#003366] p-3">{produto.categoria_nome}</td>
